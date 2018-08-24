@@ -1,20 +1,23 @@
 #!/usr/bin/node
-var fs = require('fs');
+const fs = require('fs');
 
 function pad(n) {
     return (n < 10 ? '0' : '') + n
 }
 
-let time     = new Date();
-let jsonfile = `times/${pad(time.getHours())}_${pad(time.getMinutes())}.json`;
-let quotes   = JSON.parse(fs.readFileSync(__dirname + "/" + jsonfile, 'utf8'));
+const time     = new Date();
+const hour     = pad(time.getHours());
+const minute   = pad(time.getMinutes());
 
-let count = quotes.length;
-let q     = quotes[Math.floor(Math.random() * count)];
+const jsonfile = `times/${hour}_${minute}.json`;
+const quotes   = JSON.parse(fs.readFileSync(__dirname + "/" + jsonfile, 'utf8'));
 
-let ansi_reset  = "\x1b[0m";
-let ansi_bright = "\x1b[1m";
-let ansi_dim    = "\x1b[2m";
+const count = quotes.length;
+const q     = quotes[Math.floor(Math.random() * count)];
+
+const ansi_reset  = "\x1b[0m";
+const ansi_bright = "\x1b[1m";
+const ansi_dim    = "\x1b[2m";
 
 console.log(ansi_dim          + 
             q.quote_first     + 
